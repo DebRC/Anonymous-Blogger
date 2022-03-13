@@ -33,6 +33,7 @@ class _CreateBlogState extends State<CreateBlog> {
               child: const Icon(Icons.file_upload))
         ],
       ),
+      // ignore: avoid_unnecessary_containers
       body: Container(
         child: Column(
           children: <Widget>[
@@ -40,12 +41,42 @@ class _CreateBlogState extends State<CreateBlog> {
               height: 10,
             ),
             Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16),
                 height: 150,
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(6)),
                 width: MediaQuery.of(context).size.width,
-                child: const Icon(Icons.add_a_photo)),
+                child: const Icon(
+                  Icons.add_a_photo,
+                  color: Colors.black45,
+                )),
+            const SizedBox(
+              height: 8,
+            ),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(children: <Widget>[
+                TextField(
+                  decoration: const InputDecoration(hintText: "Author Name"),
+                  onChanged: (val) {
+                    var authorName = val;
+                  },
+                ),
+                TextField(
+                  decoration: const InputDecoration(hintText: "Title"),
+                  onChanged: (val) {
+                    var title = val;
+                  },
+                ),
+                TextField(
+                  decoration: const InputDecoration(hintText: "Description"),
+                  onChanged: (val) {
+                    var description = val;
+                  },
+                )
+              ]),
+            )
           ],
         ),
       ),
