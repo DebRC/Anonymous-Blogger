@@ -1,5 +1,11 @@
 import 'package:blogapp/create_blog.dart';
+import 'package:blogapp/services/crud.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
+import 'package:blogapp/blogstyle/tile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -9,6 +15,51 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  CrudMethods crudMethods = CrudMethods();
+
+  Stream? blogStream;
+
+  Widget blogList() {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          StreamBuilder(
+              stream: blogStream,
+              builder: (context, snapshot) {
+                return snapshot.hasData
+                    ? ListView.builder(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        itemCount: (snapshot.data as QuerySnapshot).docs.length,
+                        itemBuilder: (context, index) {
+                          return BlogsTile(
+                              imgUrl: (snapshot.data as QuerySnapshot)
+                                  .docs[index]['imgUrl'],
+                              title: (snapshot.data as QuerySnapshot)
+                                  .docs[index]['title'],
+                              authorName: (snapshot.data as QuerySnapshot)
+                                  .docs[index]['authorName'],
+                              desc: (snapshot.data as QuerySnapshot).docs[index]
+                                  ['desc']);
+                        })
+                    : Container();
+              })
+        ],
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    crudMethods.getData().then((result) {
+      setState(() {
+        blogStream = result;
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,11 +68,11 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const <Widget>[
             Text(
-              "Flutter",
+              "Anonymous",
               style: TextStyle(fontSize: 22),
             ),
             Text(
-              "Blog",
+              "Blogger",
               style: TextStyle(fontSize: 22, color: Colors.blue),
             )
           ],
@@ -29,7 +80,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
-      body: Container(),
+      body: blogList(),
       floatingActionButton: Container(
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: Row(

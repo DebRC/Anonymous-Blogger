@@ -64,11 +64,11 @@ class _CreateBlogState extends State<CreateBlog> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const <Widget>[
             Text(
-              "Flutter",
+              "Anonymous",
               style: TextStyle(fontSize: 22),
             ),
             Text(
-              "Blog",
+              "Blogger",
               style: TextStyle(fontSize: 22, color: Colors.blue),
             )
           ],
@@ -134,16 +134,16 @@ class _CreateBlogState extends State<CreateBlog> {
                     margin: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(children: <Widget>[
                       TextField(
+                        decoration: const InputDecoration(hintText: "Title"),
+                        onChanged: (val) {
+                          title = val;
+                        },
+                      ),
+                      TextField(
                         decoration:
                             const InputDecoration(hintText: "Author Name"),
                         onChanged: (val) {
                           authorName = val;
-                        },
-                      ),
-                      TextField(
-                        decoration: const InputDecoration(hintText: "Title"),
-                        onChanged: (val) {
-                          title = val;
                         },
                       ),
                       TextField(

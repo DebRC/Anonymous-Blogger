@@ -10,7 +10,7 @@ class CrudMethods {
     });
   }
 
-  getData() async {
+  Future getData() async {
     return await FirebaseFirestore.instance.collection("blogs").snapshots();
   }
 }
