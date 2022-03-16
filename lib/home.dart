@@ -47,8 +47,9 @@ class _HomePageState extends State<HomePage> {
                                         authorName: "Author: " +
                                             (snapshot.data as QuerySnapshot)
                                                 .docs[index]['authorName'],
-                                        desc: (snapshot.data as QuerySnapshot)
-                                            .docs[index]['desc']),
+                                        blogText:
+                                            (snapshot.data as QuerySnapshot)
+                                                .docs[index]['blogText']),
                                   ));
                             },
                             child: BlogsTile(

@@ -1,6 +1,7 @@
 import 'package:blogapp/services/crud.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/routes/default_transitions.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -8,14 +9,14 @@ import 'package:random_string/random_string.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 class BlogPage extends StatefulWidget {
-  final String imgUrl, title, desc, authorName;
+  final String imgUrl, title, authorName, blogText;
 
   const BlogPage(
       {Key? key,
       required this.imgUrl,
       required this.title,
       required this.authorName,
-      required this.desc})
+      required this.blogText})
       : super(key: key);
 
   @override
@@ -77,9 +78,20 @@ class _CreateBlogPage extends State<BlogPage> {
               widget.authorName,
               style: const TextStyle(
                 fontSize: 15,
+                fontStyle: FontStyle.italic,
               ),
             ),
-          )
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              widget.blogText,
+              style: const TextStyle(
+                fontSize: 20,
+              ),
+            ),
+          ),
         ],
       ),
     );
