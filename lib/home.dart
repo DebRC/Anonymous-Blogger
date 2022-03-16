@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:blogapp/tile.dart';
+import 'package:blogapp/blogpage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -33,15 +34,33 @@ class _HomePageState extends State<HomePage> {
                         physics: const ClampingScrollPhysics(),
                         itemCount: (snapshot.data as QuerySnapshot).docs.length,
                         itemBuilder: (context, index) {
-                          return BlogsTile(
-                              imgUrl: (snapshot.data as QuerySnapshot)
-                                  .docs[index]['imgUrl'],
-                              title: (snapshot.data as QuerySnapshot)
-                                  .docs[index]['title'],
-                              authorName: (snapshot.data as QuerySnapshot)
-                                  .docs[index]['authorName'],
-                              desc: (snapshot.data as QuerySnapshot).docs[index]
-                                  ['desc']);
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BlogPage(
+                                        imgUrl: (snapshot.data as QuerySnapshot)
+                                            .docs[index]['imgUrl'],
+                                        title: (snapshot.data as QuerySnapshot)
+                                            .docs[index]['title'],
+                                        authorName: "Author: " +
+                                            (snapshot.data as QuerySnapshot)
+                                                .docs[index]['authorName'],
+                                        desc: (snapshot.data as QuerySnapshot)
+                                            .docs[index]['desc']),
+                                  ));
+                            },
+                            child: BlogsTile(
+                                imgUrl: (snapshot.data as QuerySnapshot)
+                                    .docs[index]['imgUrl'],
+                                title: (snapshot.data as QuerySnapshot)
+                                    .docs[index]['title'],
+                                authorName: (snapshot.data as QuerySnapshot)
+                                    .docs[index]['authorName'],
+                                desc: (snapshot.data as QuerySnapshot)
+                                    .docs[index]['desc']),
+                          );
                         })
                     : Container();
               })

@@ -14,7 +14,7 @@ class CreateBlog extends StatefulWidget {
 }
 
 class _CreateBlogState extends State<CreateBlog> {
-  late String authorName, title, desc;
+  late String authorName, title, desc, blogText;
 
   File? selectedImage;
 
@@ -48,7 +48,8 @@ class _CreateBlogState extends State<CreateBlog> {
         "imgUrl": downloadUrl,
         "authorName": authorName,
         "title": title,
-        "desc": desc
+        "desc": desc,
+        "blogText": blogText
       };
       crudMethods.addData(blogMap).then((result) {
         Navigator.pop(context);
@@ -90,72 +91,87 @@ class _CreateBlogState extends State<CreateBlog> {
       body: _isLoading
           ? Container(
               alignment: Alignment.center,
-              child: CircularProgressIndicator(),
+              child: const CircularProgressIndicator(),
             )
-          : Container(
-              child: Column(
-                children: <Widget>[
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      getImage();
-                    },
-                    child: selectedImage != null
-                        ? Container(
-                            margin: EdgeInsets.symmetric(horizontal: 16),
-                            height: 170,
-                            width: MediaQuery.of(context).size.width,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(6),
-                              child: Image.file(
-                                selectedImage!,
-                                fit: BoxFit.cover,
+          : SingleChildScrollView(
+              reverse: true,
+              child: Container(
+                child: Column(
+                  children: <Widget>[
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        getImage();
+                      },
+                      child: selectedImage != null
+                          ? Container(
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 16),
+                              height: 170,
+                              width: MediaQuery.of(context).size.width,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(6),
+                                child: Image.file(
+                                  selectedImage!,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
-                          )
-                        : Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 16),
-                            height: 150,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(6)),
-                            width: MediaQuery.of(context).size.width,
-                            child: const Icon(
-                              Icons.add_a_photo,
-                              color: Colors.black45,
-                            )),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(children: <Widget>[
-                      TextField(
-                        decoration: const InputDecoration(hintText: "Title"),
-                        onChanged: (val) {
-                          title = val;
-                        },
-                      ),
-                      TextField(
-                        decoration:
-                            const InputDecoration(hintText: "Author Name"),
-                        onChanged: (val) {
-                          authorName = val;
-                        },
-                      ),
-                      TextField(
-                        decoration:
-                            const InputDecoration(hintText: "Description"),
-                        onChanged: (val) {
-                          desc = val;
-                        },
-                      )
-                    ]),
-                  )
-                ],
+                            )
+                          : Container(
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 16),
+                              height: 150,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(6)),
+                              width: MediaQuery.of(context).size.width,
+                              child: const Icon(
+                                Icons.add_a_photo,
+                                color: Colors.black45,
+                              )),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(children: <Widget>[
+                        TextField(
+                          decoration: const InputDecoration(hintText: "Title"),
+                          onChanged: (val) {
+                            title = val;
+                          },
+                        ),
+                        TextField(
+                          decoration:
+                              const InputDecoration(hintText: "Author Name"),
+                          onChanged: (val) {
+                            authorName = val;
+                          },
+                        ),
+                        TextField(
+                          decoration:
+                              const InputDecoration(hintText: "Description"),
+                          onChanged: (val) {
+                            desc = val;
+                          },
+                        ),
+                        TextField(
+                          keyboardType: TextInputType.multiline,
+                          minLines: 5,
+                          maxLines: null,
+                          decoration: const InputDecoration(
+                              hintText: "Write Your Blog Here"),
+                          onChanged: (val) {
+                            blogText = val;
+                          },
+                        )
+                      ]),
+                    )
+                  ],
+                ),
               ),
             ),
     );
