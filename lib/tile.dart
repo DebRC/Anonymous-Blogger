@@ -50,13 +50,19 @@ class _BlogsTileState extends State<BlogsTile> {
                     style: const TextStyle(fontSize: 20),
                   ),
                   const SizedBox(
-                    height: 4,
+                    height: 15,
                   ),
-                  Text(widget.desc, style: const TextStyle(fontSize: 16)),
+                  Text(
+                    widget.desc,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontStyle: FontStyle.italic,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                   const SizedBox(
                     height: 4,
                   ),
-                  Text(widget.authorName),
                 ],
               ),
             )
