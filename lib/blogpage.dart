@@ -48,51 +48,53 @@ class _CreateBlogPage extends State<BlogPage> {
         elevation: 0,
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            height: MediaQuery.of(context).size.height * 0.2,
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(6),
-                child: CachedNetworkImage(
-                  imageUrl: widget.imgUrl,
-                  fit: BoxFit.cover,
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.2,
-                )),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: Text(
-              widget.title,
-              style: const TextStyle(
-                fontSize: 25,
-                decoration: TextDecoration.underline,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              height: MediaQuery.of(context).size.height * 0.2,
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(6),
+                  child: CachedNetworkImage(
+                    imageUrl: widget.imgUrl,
+                    fit: BoxFit.cover,
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * 0.2,
+                  )),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: Text(
+                widget.title,
+                style: const TextStyle(
+                  fontSize: 25,
+                  decoration: TextDecoration.underline,
+                ),
               ),
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            child: Text(
-              widget.authorName,
-              style: const TextStyle(
-                fontSize: 15,
-                fontStyle: FontStyle.italic,
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: Text(
+                widget.authorName,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontStyle: FontStyle.italic,
+                ),
               ),
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-            alignment: Alignment.centerLeft,
-            child: Text(
-              widget.blogText,
-              style: const TextStyle(
-                fontSize: 20,
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                widget.blogText,
+                style: const TextStyle(
+                  fontSize: 20,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
