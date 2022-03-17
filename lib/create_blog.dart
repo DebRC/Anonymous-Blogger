@@ -14,7 +14,10 @@ class CreateBlog extends StatefulWidget {
 }
 
 class _CreateBlogState extends State<CreateBlog> {
-  late String authorName, title, desc, blogText;
+  late String authorName = "";
+  late String title = "";
+  late String desc = "";
+  late String blogText = "";
 
   File? selectedImage;
 
@@ -32,7 +35,11 @@ class _CreateBlogState extends State<CreateBlog> {
 
   uploadBlog() async {
     await Firebase.initializeApp();
-    if (selectedImage != null) {
+    if (selectedImage != null &&
+        title != "" &&
+        authorName != "" &&
+        desc != "" &&
+        blogText != "") {
       setState(() {
         _isLoading = true;
       });
@@ -54,7 +61,25 @@ class _CreateBlogState extends State<CreateBlog> {
       crudMethods.addData(blogMap).then((result) {
         Navigator.pop(context);
       });
-    } else {}
+    } else {
+      var alertDialog = AlertDialog(
+        title: const Text("Some Field is Empty"),
+        content: const Text("Make Sure To Fill Up Every Field"),
+        actions: [
+          TextButton(
+            child: const Text("Ok"),
+            onPressed: () {
+              Navigator.of(context, rootNavigator: true).pop('dialog');
+            },
+          )
+        ],
+      );
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return alertDialog;
+          });
+    }
   }
 
   @override
@@ -160,7 +185,7 @@ class _CreateBlogState extends State<CreateBlog> {
                         ),
                         TextField(
                           keyboardType: TextInputType.multiline,
-                          minLines: 5,
+                          minLines: 10,
                           maxLines: null,
                           decoration: const InputDecoration(
                               hintText: "Write Your Blog Here"),
