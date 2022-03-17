@@ -6,7 +6,7 @@ Made using Flutter and FireBase in the backend.
 <ul>
   <li>Home Page
     <ul style="list-style-type:none;">
-  <li><img src="assets/sample/homepage.jpg"></li>
+  <img src="assets/sample/homepage.jpg">
     </ul>
   <li>Create Blog Page
         <ul style="list-style-type:none;">
@@ -18,3 +18,16 @@ Made using Flutter and FireBase in the backend.
   <li><img src="assets/sample/blogpage2.jpg"></li>
     </ul>
  </ul>
+
+## ► Screenshots
+| HomePage |
+|--------------|
+| <img src="assets/sample/homepage.jpg" width="500"> |
+
+| CreateBlog |
+|--------------|
+| <img src="assets/sample/createblog.jpg" width="500"> |
+
+| BlogPage |
+| ---------------|------------------|
+| <img src=".assets/sample/blogpage.jpg" width="500"> | <img src="assets/sample/blogpage2.jpg" width="500"> |
