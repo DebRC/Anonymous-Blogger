@@ -5,10 +5,16 @@ Made using Flutter and FireBase in the backend.
 ## ► Screenshots
 <ul>
   <li>Home Page
-    <img src="assets/sample/homepage.jpg">
+    <ul style="list-style-type:none;">
+  <li><img src="assets/sample/homepage.jpg"></li>
+    </ul>
   <li>Create Blog Page
-    <img src="assets/sample/createblog.jpg">
+        <ul style="list-style-type:none;">
+  <li><img src="assets/sample/createblog.jpg"></li>
+    </ul>
   <li>Blog Page
-    <img src="assets/sample/blogpage.jpg">
-    <img src="assets/sample/blogpage2.jpg">
+    <ul style="list-style-type:none;">
+  <li><img src="assets/sample/blogpage.jpg"></li>
+  <li><img src="assets/sample/blogpage2.jpg"></li>
+    </ul>
  </ul>
